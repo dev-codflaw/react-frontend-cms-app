@@ -3,6 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import axios from 'axios';
+
+axios.defaults.baseURL = 'https://cms.codflaw.com';
+axios.defaults.headers.get['Accept'] = 'application/json'   // default header for all get request
+
 
 ReactDOM.render(
   // <React.StrictMode>

@@ -22,7 +22,7 @@ function Project(props) {
             elevation={10}
             // `URL('https://cms.codflaw.com/${props.item.slide_img}')`
         >
-            <div style={{backgroundImage: "URL('https://placeimg.com/1200/300/tech/grayscale')",
+            <div style={{backgroundImage: `URL('${axios.defaults.baseURL}${props.item.slide_img}')`,
              height: '450px',
              backgroundSize: 'cover',
              backgroundRepeat: 'no-repeat'
@@ -54,7 +54,7 @@ const Home = () => {
     const [slideDataArr, setSlideDataArr] = useState([]);
 
     useEffect(() => {
-        axios.get(`https://cms.codflaw.com/carousel/1/`)
+        axios.get(`/carousel/1/`)
         .then(function (response){
             console.log(response)
             setSlideDataArr(response.data.images)

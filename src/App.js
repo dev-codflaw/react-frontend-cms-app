@@ -4,7 +4,10 @@ import PostDetailPage from './views/PostDetailPage'
 import CategoryListPage from './views/CategoryListPage'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
+
+
 function App() {
+
   return (
     <div >
       <BrowserRouter>

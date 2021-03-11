@@ -39,7 +39,7 @@ const CategoryCard = (props) => {
                         component="img"
                         alt="Contemplative Reptile"
                         height="140"
-                        image={'http://127.0.0.1:8000'+props.item.image}
+                        // image={axios.defaults.baseURL+props.item.image}
                     />}
 
                     <CardContent>
@@ -66,7 +66,7 @@ const CategoryListPage = () => {
     const [categoryDataArr, setCategoryDataArr] = useState([]);
 
     useEffect(()=>{
-        axios.get('http://127.0.0.1:8000/categories/')
+        axios.get('/categories/')
         .then(response => {
             console.log(response);
             setCategoryDataArr(response.data);
@@ -101,6 +101,7 @@ const CategoryListPage = () => {
             <Container >
                 {/* <PageHeader image={'https://placeimg.com/1200/300/tech/grayscale'} /> */}
                 {error && <ServerError />}
+                {JSON.stringify(axios.defaults.baseURL)}
                 {/* {JSON.stringify(categoryDataArr)} */}
                 <Grid container spacing={3} className={classes.main}>
                     {categoryDataArr.map((item, index) => < CategoryCard item={item} key={index}  /> )}

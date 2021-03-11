@@ -14,7 +14,7 @@ const ContentBlock = (props) => {
             <React.Fragment>
                 <h1>{props.rawData.title}</h1>
                 <h3>{props.rawData.subtitle}</h3>
-                <h4>{ new Date(props.rawData.updated_at).toLocaleDateString()}</h4>
+                {/* <h4>{ new Date(props.rawData.updated_at).toLocaleDateString()}</h4> */}
                 <div dangerouslySetInnerHTML={{__html:props.rawData.description}}></div>
             </React.Fragment>
         );          
@@ -27,7 +27,7 @@ const PostDetailPage = () => {
     const [dataArr, setDataArr] = useState([]);
 
     useEffect(() => {
-        axios.get(`http://127.0.0.1:8000/posts${location.pathname}/`)
+        axios.get(`/posts${location.pathname}/`)
         .then(function (response){
             console.log(response);
             setDataArr(response.data)

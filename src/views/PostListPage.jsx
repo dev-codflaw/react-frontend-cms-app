@@ -74,7 +74,7 @@ const PostItemCard = (props) => {
                 {props.item.image &&
                 <CardMedia
                 className={classes.media}
-                image={'http://127.0.0.1:8000'+props.item.image}
+                image={axios.defaults.baseURL+props.item.image}
                 title="Paella dish"
               />}
                 <CardContent>
@@ -112,7 +112,7 @@ const PostListPage = () => {
   const [dataArr, setDataArr] = useState([]);
 
   useEffect(() => {
-      axios.get('http://127.0.0.1:8000/posts/')
+      axios.get('/posts/')
       .then(function (response){
           console.log(response);
           setDataArr(response.data)
