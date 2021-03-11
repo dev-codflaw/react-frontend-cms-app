@@ -114,7 +114,7 @@ const Header = () => {
                 <Container maxWidth="lg">
                     <Toolbar>
                     <Typography variant="h6" className={classes.title}>
-                        <Button href="/" color="inherit">{'< codflaw />'}</Button>
+                        <Button href="/" color="inherit">codflaw</Button>
                     </Typography>
                     <Button color="inherit">Latest Post</Button>
                     <Button color="inherit">About</Button>
