@@ -1,11 +1,9 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-// import Link from '@material-ui/core/Link'
 import { Container } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -14,16 +12,14 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Snackbar from '@material-ui/core/Snackbar';
-// import { emphasize, withStyles } from '@material-ui/core/styles';
-// import Breadcrumbs from '@material-ui/core/Breadcrumbs';
-// import Chip from '@material-ui/core/Chip';
-// import HomeIcon from '@material-ui/icons/Home';
-// import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import {Link} from 'react-router-dom'
+
 
 
 const useStyles = makeStyles((theme) => ({
     root: {
       flexGrow: 1,
+      
     },
     menuButton: {
       marginRight: theme.spacing(2),
@@ -32,33 +28,17 @@ const useStyles = makeStyles((theme) => ({
       flexGrow: 1,
     },
     navbarColor:{
-      background: '#2E3B55'
+      background: '#2E3B55',
     }
   }));
-
-// const StyledBreadcrumb = withStyles((theme) => ({
-//   root: {
-//     backgroundColor: theme.palette.grey[100],
-//     height: theme.spacing(3),
-//     color: theme.palette.grey[800],
-//     fontWeight: theme.typography.fontWeightRegular,
-//     '&:hover, &:focus': {
-//       backgroundColor: theme.palette.grey[300],
-//     },
-//     '&:active': {
-//       boxShadow: theme.shadows[1],
-//       backgroundColor: emphasize(theme.palette.grey[300], 0.12),
-//     },
-//   },
-// }))(Chip); // TypeScript only: need a type cast here because https://github.com/Microsoft/TypeScript/issues/26591
 
 
 
 const Header = () => {
     const classes = useStyles();
-    const location = useLocation();
     const [enquiry, setEnquiry] = React.useState({username: '',emailaddr: ''});
     const [open, setOpen] = React.useState(false);
+    const [error, setError] = React.useState(false);
     const [state, setState] = React.useState({
       openSnackBar: false,
       vertical: "top",
@@ -85,13 +65,15 @@ const Header = () => {
 
     const handleSend = (e) => {
       e.preventDefault();
-      alert(JSON.stringify(enquiry));
+      // alert(JSON.stringify(enquiry));
       if(enquiry.username === '' || enquiry.emailaddr === ''){
-        alert('blank');
+        setError(true);
+        // alert('blank');
       }else{
-        alert('good to go');
+        // alert('good to go');
+        setError(false);
         setEnquiry({username: '',emailaddr: ''});
-        setOpen(false);
+        setOpen(false); // to close dialog
         setState({ openSnackBar: true, vertical: 'top', horizontal: 'center' });
 
 
@@ -106,36 +88,27 @@ const Header = () => {
       setState({ ...state, openSnackBar: false });
     };
 
+    const preventDefault = (event) => event.preventDefault();
 
     return (
         <React.Fragment>
             <div className={classes.root}>
-            <AppBar position="static" className={classes.navbarColor}>
+            <AppBar position="fixed" className={classes.navbarColor}>
                 <Container maxWidth="lg">
                     <Toolbar>
                     <Typography variant="h6" className={classes.title}>
-                        <Button href="/" color="inherit">codflaw</Button>
+                        <Link style={{color: "white", textDecoration: 'none', textTransform: 'uppercase'}} to="/" color="inherit">codflaw</Link>
                     </Typography>
-                    <Button color="inherit">Latest Post</Button>
+                    <Link style={{color: "white", textDecoration: 'none', textTransform: 'uppercase', paddingRight:"10px"}} to="/latest" color="inherit">Latest Post</Link>
                     <Button color="inherit">About</Button>
-                    <Button href="/category"  color="inherit">Category</Button>
-                    <Button href="/post"  color="inherit">Posts</Button>
-                    <Button onClick={handleClickOpen} color="inherit">Contact</Button>
+                    <Link style={{color: "white", textDecoration: 'none', textTransform: 'uppercase', paddingRight:"10px"}} to="/category"  color="inherit">Category</Link>
+                    <Link style={{color: "white", textDecoration: 'none', textTransform: 'uppercase', paddingRight:"10px"}} to="/posts"  color="inherit">Posts</Link>
+                    {/* <Button onClick={handleClickOpen} color="inherit">Contact</Button> */}
                     </Toolbar>
                 </Container>
 
             </AppBar>
-            {/* <Breadcrumbs aria-label="breadcrumb" style={{backgroundColor: '#eeeeee', paddingTop: '3px', paddingBottom:'3px'}}>
-              {}
-              <StyledBreadcrumb
-                component="a"
-                href="#"
-                label="Home"
-                icon={<HomeIcon fontSize="small" />}
-              />
-              <StyledBreadcrumb component="a" href="#" label={location.pathname} />
-
-            </Breadcrumbs> */}
+      
 
 
             </div>
@@ -146,7 +119,9 @@ const Header = () => {
               <DialogContentText>
                 Just type your name and email and we will contact you soon.
               </DialogContentText>
+              <br />
               <TextField
+                variant="outlined"
                 onChange={handleChange}
                 autoFocus
                 margin="dense"
@@ -155,8 +130,10 @@ const Header = () => {
                 label="Your Name"
                 type="text"
                 fullWidth
-              />
+                helperText={error && "Please enter your name"}
+              /><br /><br />
               <TextField
+                variant="outlined"
                 onChange={handleChange}
                 margin="dense"
                 id="emailaddr"
@@ -164,6 +141,8 @@ const Header = () => {
                 label="Your Email Address"
                 type="email"
                 fullWidth
+                helperText={error && "Please enter your email"}
+
               />
             </DialogContent>
             <DialogActions>
@@ -185,7 +164,7 @@ const Header = () => {
             anchorOrigin={{ vertical, horizontal }}
             open={openSnackBar}
             onClose={handleSnackBarClose}
-            message="I love snacks"
+            message="Thanks to contact."
             key={vertical + horizontal}
           />
 

@@ -5,6 +5,8 @@ import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import CookieConsent from './CookiConsent';
+import CookiConsent from '../components/CookiConsent'
 
 function Copyright() {
   return (
@@ -78,6 +80,7 @@ export default function Footer() {
           <Copyright />
         </Container>
       </footer>
+      {/* <CookieConsent /> */}
     </div>
   );
 }

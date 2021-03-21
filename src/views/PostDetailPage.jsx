@@ -7,13 +7,31 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import { useLocation } from 'react-router-dom'
 import PageHeader from '../components/PageHeader'
-const ContentBlock = (props) => {
+import Chip from '@material-ui/core/Chip'
 
+
+const TagComponent = (props) => {
     return(
- 
+        <>
+            {JSON.stringify(props.data)}
+        </>
+    );
+}
+
+const ContentBlock = (props) => {
+    return(
             <React.Fragment>
+                {props.rawData.image && 
+                <PageHeader image={axios.defaults.baseURL+props.rawData.image} />
+                }
                 <h1>{props.rawData.title}</h1>
-                <h3>{props.rawData.subtitle}</h3>
+                {/* {JSON.stringify(props.rawData.tags)} */}
+                {/* <TagComponent data={props.rawData.tags}/> */}
+                <span>
+                        { new Date(props.rawData.updated_at).toLocaleString('default', {month:'short'})} &nbsp;
+                        { new Date(props.rawData.updated_at).getDate()}
+                </span>
+                {/* <h3>{props.rawData.subtitle}</h3> */}
                 {/* <h4>{ new Date(props.rawData.updated_at).toLocaleDateString()}</h4> */}
                 <div dangerouslySetInnerHTML={{__html:props.rawData.description}}></div>
             </React.Fragment>
@@ -22,7 +40,6 @@ const ContentBlock = (props) => {
 }
 
 const PostDetailPage = () => {
-
     const location = useLocation();
     const [dataArr, setDataArr] = useState([]);
 
@@ -44,23 +61,15 @@ const PostDetailPage = () => {
     return(
         <React.Fragment>
             <CssBaseline />
-            <Header />
+                <Container maxWidth="lg" style={{paddingTop:"50px"}}>
 
-            <Container maxWidth="lg">
-                {/* <PageHeader image={'https://placeimg.com/1200/300/tech/grayscale'} /> */}
-
-
-                {/* {JSON.stringify(dataArr)} */}
-              <main>
-               
-              <ContentBlock rawData={dataArr} />
-
-              </main>
-            </Container>
-            <Footer />
+                    {/* {JSON.stringify(dataArr)} */}
+                    <main>
+                        <ContentBlock rawData={dataArr} />
+                    </main>
+                </Container>
           </React.Fragment>
     );
 }
-
 
 export default PostDetailPage;

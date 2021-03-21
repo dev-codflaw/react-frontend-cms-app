@@ -30,8 +30,8 @@ const CategoryCard = (props) => {
     const classes = useStyles();
 
     return(
-        <React.Fragment>
-            <Grid item xs={4}>
+        <React.Fragment >
+            <Grid item xs={12} sm={6} md={6} lg={4}>
             <Card className={classes.root}>
                 <CardActionArea>
                     {props.item.image &&                     
@@ -97,18 +97,18 @@ const CategoryListPage = () => {
 
     return(
         <React.Fragment>
-            <Header />
-            <Container >
+            {/* <Header /> */}
+            <Container style={{paddingTop:"50px"}} >
                 {/* <PageHeader image={'https://placeimg.com/1200/300/tech/grayscale'} /> */}
                 {error && <ServerError />}
                 {/* {JSON.stringify(axios.defaults.baseURL)} */}
                 {/* {JSON.stringify(categoryDataArr)} */}
                 <Grid container spacing={3} className={classes.main}>
-                    {categoryDataArr.map((item, index) => < CategoryCard item={item} key={index}  /> )}
 
+                        {categoryDataArr.map((item, index) => < CategoryCard item={item} key={index}  /> )}
                 </Grid>
             </Container>
-            <Footer />
+            {/* <Footer /> */}
         </React.Fragment>
     );
 }

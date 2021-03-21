@@ -102,7 +102,7 @@ const PostItemCard = (props) => {
 }
 
 
-const PostListPage = () => {
+const LatestPostListPage = () => {
   const classes = useStyles();
 
   const [dataArr, setDataArr] = useState([]);
@@ -136,7 +136,7 @@ const PostListPage = () => {
 
   // Fetch Posts 
   const fetchPosts = async () => {
-    const res = await axios.get(`/posts/`);
+    const res = await axios.get(`/posts/latest/`);
     const data = await res.data;
     // console.log(data);
 
@@ -156,7 +156,7 @@ const PostListPage = () => {
             <React.Fragment>
             <CssBaseline />
             <Container maxWidth="sm" style={{paddingTop:"50px"}}>
-              <h3>Posts</h3>
+              <h3>Latest Posts</h3>
 
               {/* {dataArr && dataArr.map((item, index) => <p key={index}>{item.title}</p> )} */}
               {/* {JSON.stringify(posts)} */}
@@ -171,4 +171,4 @@ const PostListPage = () => {
     );
 }
 
-export default PostListPage;
+export default LatestPostListPage;

@@ -1,8 +1,5 @@
 import React from 'react'
 import { Container } from '@material-ui/core';
-import Header from '../components/Header';
-// import StickyFooter from '../components/StickyFooter';
-import Footer from '../components/Footer';
 import Carousel from 'react-material-ui-carousel';
 import {
     Paper,
@@ -10,6 +7,7 @@ import {
 } from '@material-ui/core'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import LatestPostListPage from './LatestPostListPage'
 
 
 function Project(props) {
@@ -17,7 +15,8 @@ function Project(props) {
         <Paper
             className="Project"
             style={{
-                // backgroundColor: '#cfcfcf',
+                backgroundColor: '#cfcfcf',
+                paddingTop: "50px"
             }}
             elevation={10}
             // `URL('https://cms.codflaw.com/${props.item.slide_img}')`
@@ -71,8 +70,8 @@ const Home = () => {
 
     return(
         <React.Fragment>
-            <Header/>
             <Carousel
+                    
                     // className="SecondExample"
                     autoPlay={false}
                     animation={"fade"}
@@ -90,13 +89,11 @@ const Home = () => {
                 </Carousel>
             <Container >
                 {/* {JSON.stringify(slideDataArr)} */}
+                <LatestPostListPage />
 
             </Container>
-            <Footer />
-            {/* <StickyFooter /> */}
         </React.Fragment>
     );
 }
-
 
 export default Home;
