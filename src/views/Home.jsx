@@ -38,9 +38,9 @@ function Project(props) {
                     <h2>{props.item.title_on_slide}</h2>
                     <p>{props.item.desc_on_slide}</p>
 
-                    <Button href={props.item.call_to_action_link_on_slide} className="CheckButton">
+                    {/* <Button href={props.item.call_to_action_link_on_slide} className="CheckButton">
                         Check it out!
-                    </Button>
+                    </Button> */}
                  </div>
                 
             </div>
