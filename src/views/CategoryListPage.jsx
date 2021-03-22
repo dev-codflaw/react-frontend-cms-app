@@ -14,6 +14,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import PageHeader from '../components/PageHeader'
 import ServerError from '../components/ServerError'
+import LinearProgress from '@material-ui/core/LinearProgress'
 
 const useStyles = makeStyles({
     root: {
@@ -64,12 +65,14 @@ const CategoryListPage = () => {
     const classes = useStyles();
     const [error, setError] = useState(false);
     const [categoryDataArr, setCategoryDataArr] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(()=>{
         axios.get('/categories/')
         .then(response => {
             console.log(response);
             setCategoryDataArr(response.data);
+            setLoading(false);
         })
         .catch((error) => {
             // Error
@@ -98,7 +101,10 @@ const CategoryListPage = () => {
     return(
         <React.Fragment>
             {/* <Header /> */}
-            <Container style={{paddingTop:"50px"}} >
+            <Container style={{paddingTop:"80px"}} >
+                {loading &&
+                <LinearProgress/>
+                }
                 {/* <PageHeader image={'https://placeimg.com/1200/300/tech/grayscale'} /> */}
                 {error && <ServerError />}
                 {/* {JSON.stringify(axios.defaults.baseURL)} */}

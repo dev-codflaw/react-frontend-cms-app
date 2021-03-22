@@ -18,6 +18,8 @@ import Button from '@material-ui/core/Button'
 import { Grid, Paper, Chip } from '@material-ui/core'
 import PageHeader from '../components/PageHeader'
 import {Link} from 'react-router-dom'
+import LinearProgress from '@material-ui/core/LinearProgress';
+
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -107,12 +109,15 @@ const PostListPage = () => {
 
   const [dataArr, setDataArr] = useState([]);
   const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
 
   useEffect(() => {
 
     const getPosts = async () => {
       const postsFromServer = await fetchPosts()
       setPosts(postsFromServer);
+      setLoading(false);
 
     }
 
@@ -157,7 +162,9 @@ const PostListPage = () => {
             <CssBaseline />
             <Container maxWidth="sm" style={{paddingTop:"50px"}}>
               <h3>Posts</h3>
-
+              {loading && 
+                  <LinearProgress />
+              }
               {/* {dataArr && dataArr.map((item, index) => <p key={index}>{item.title}</p> )} */}
               {/* {JSON.stringify(posts)} */}
               

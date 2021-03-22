@@ -89,6 +89,7 @@ const Home = () => {
                 </Carousel>
             <Container >
                 {/* {JSON.stringify(slideDataArr)} */}
+
                 <LatestPostListPage />
 
             </Container>
